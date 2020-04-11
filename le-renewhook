@@ -1,0 +1,11 @@
+#!/bin/sh
+
+DIRECTORYADMINPASS=$(/usr/bin/cat /root/.directorymanager)
+
+/usr/sbin/ipactl start
+/usr/bin/printf '%s' "$DIRECTORYADMINPASS" | /usr/bin/printf '\n\n' | /usr/local/bin/le-updateipa
+/usr/sbin/ipactl restart
+/usr/sbin/remotectl certificate /etc/letsencrypt/live/$HOSTNAME/fullchain.pem /etc/letsencrypt/live/$HOSTNAME/privkey.pem
+/usr/bin/systemctl restart cockpit
+
+unset DIRECTORYADMINPASS

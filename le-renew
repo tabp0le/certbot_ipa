@@ -1,0 +1,9 @@
+#/bin/bash
+
+/usr/local/bin/certbot-auto certonly --standalone --non-interactive -d $HOSTNAME --renew-hook "/bin/sh -c /usr/local/bin/le-renewhook"
+
+if [ "$?" != "0" ]; then
+    echo "Can't open port" 1>&2
+    /usr/sbin/ipactl stop
+    /usr/local/bin/certbot-auto certonly --standalone --non-interactive -d $HOSTNAME --renew-hook "/bin/sh -c /usr/local/bin/le-renewhook"
+fi

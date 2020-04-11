@@ -1,0 +1,2 @@
+#!/bin/sh
+/usr/sbin/ipa-server-certinstall -w -d /etc/letsencrypt/live/$HOSTNAME/privkey.pem /etc/letsencrypt/live/$HOSTNAME/cert.pem
