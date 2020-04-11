@@ -30,4 +30,7 @@ This is a pretty basic script. Just needed a way to renew LE certs automagically
     $ sudo chown root:root /usr/local/bin/le-*
     $ sudo chmod 0750 /usr/local/bin/le-*
     ```
-4. Set up your cron job to run /usr/local/bin/le-renew
+4. Set up your cron job
+    ```
+    $ echo "0 0,12 * * * root python3 -c 'import random; import time; time.sleep(random.random() * 3600)' && /usr/local/bin/le-renew" | sudo tee -a /etc/crontab > /dev/null
+    ```
